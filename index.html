@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DS Quiz | Tecnologia em Azul</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="fundo-luz luz1"></div>
+    <div class="fundo-luz luz2"></div>
+
+    <main class="quiz-container">
+
+        <header class="topo">
+            <div class="logo">
+                <span class="logo-icone">&lt;/&gt;</span>
+                DS <span>QUIZ</span>
+            </div>
+
+            <div class="tag-topo">
+                <span class="ponto"></span>
+                DESAFIO TECNOLÓGICO
+            </div>
+        </header>
+
+        <!-- TELA INICIAL -->
+        <section id="inicio" class="tela">
+
+            <div class="apresentacao">
+
+                <div class="texto-apresentacao">
+                    <p class="subtitulo">DESENVOLVIMENTO DE SISTEMAS</p>
+
+                    <h1>
+                        O conhecimento é o seu
+                        <span>próximo nível!</span>
+                    </h1>
+
+                    <p class="descricao">
+                        Prepare-se para testar o que você sabe sobre
+                        tecnologia, programação e o mundo dos sistemas.
+                    </p>
+
+                    <div class="frase-destaque">
+                        <span>✦</span>
+                        Cada pergunta é uma nova oportunidade de aprender.
+                    </div>
+                </div>
+
+                <!-- ILUSTRAÇÃO DO COMPUTADOR -->
+                <div class="ilustracao">
+                    <div class="circulo-ilustracao"></div>
+
+                    <div class="icone-tecnologia codigo">&lt;/&gt;</div>
+                    <div class="icone-tecnologia wifi">⌁</div>
+                    <div class="icone-tecnologia estrela">✦</div>
+
+                    <div class="computador">
+                        <div class="tela-computador">
+                            <div class="barra-computador">
+                                <i></i><i></i><i></i>
+                            </div>
+
+                            <div class="codigo-tela">
+                                <span>const</span> tecnologia = <span>"futuro"</span>;
+                            </div>
+
+                            <div class="codigo-linha"></div>
+                            <div class="codigo-linha curta"></div>
+                            <div class="codigo-linha media"></div>
+
+                            <div class="simbolo-tela">{ }</div>
+                        </div>
+
+                        <div class="base-computador"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="informacoes">
+                <div class="info-card">
+                    <span class="info-icone">▤</span>
+                    <div>
+                        <strong>05</strong>
+                        <small>Perguntas</small>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <span class="info-icone">◷</span>
+                    <div>
+                        <strong>01</strong>
+                        <small>Desafio</small>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <span class="info-icone">✧</span>
+                    <div>
+                        <strong>100%</strong>
+                        <small>Aprendizado</small>
+                    </div>
+                </div>
+            </div>
+
+            <button id="comecar" class="botao-principal">
+                COMEÇAR DESAFIO
+                <span>➜</span>
+            </button>
+
+            <p class="mensagem-inicial">
+                Seu conhecimento merece ser colocado à prova!
+            </p>
+
+        </section>
+
+        <!-- TELA DAS PERGUNTAS -->
+        <section id="quiz" class="tela" hidden>
+
+            <div class="cabecalho-pergunta">
+                <div>
+                    <span class="pequeno-titulo">SEU DESAFIO</span>
+                    <h2>Vamos testar seus conhecimentos?</h2>
+                </div>
+
+                <div class="icone-pergunta">?</div>
+            </div>
+
+            <div class="info">
+                <span id="contador">Pergunta 1 de 5</span>
+                <span id="progresso">0%</span>
+            </div>
+
+            <div class="barra">
+                <div id="barra-progresso"></div>
+            </div>
+
+            <div class="pergunta-area">
+                <span class="numero-pergunta">✦ PERGUNTA</span>
+                <h3 id="pergunta"></h3>
+            </div>
+
+            <div id="alternativas"></div>
+
+            <div class="rodape-quiz">
+                <span id="aviso">Escolha uma alternativa para continuar.</span>
+
+                <button id="proximo" hidden>
+                    PRÓXIMA <span>➜</span>
+                </button>
+            </div>
+
+        </section>
+
+        <!-- TELA FINAL -->
+        <section id="resultado" class="tela" hidden>
+
+            <div class="trofeu">🏆</div>
+
+            <p class="subtitulo">DESAFIO FINALIZADO</p>
+
+            <h1>
+                Você chegou ao
+                <span>final!</span>
+            </h1>
+
+            <p class="descricao">
+                Confira como você se saiu. O importante é continuar aprendendo!
+            </p>
+
+            <div class="pontuacao">
+                <span>SUA PONTUAÇÃO</span>
+                <strong id="pontuacao">0/5</strong>
+                <div class="barra-final">
+                    <div id="barra-final-preenchida"></div>
+                </div>
+            </div>
+
+            <div class="resumo">
+                <div class="acertos">
+                    <strong id="total-acertos">0</strong>
+                    <span>ACERTOS</span>
+                </div>
+
+                <div class="erros">
+                    <strong id="total-erros">0</strong>
+                    <span>ERROS</span>
+                </div>
+            </div>
+
+            <div class="frase-final">
+                ✦ "Aprender hoje é construir as possibilidades de amanhã."
+            </div>
+
+            <h3 class="titulo-revisao">REVISÃO DAS RESPOSTAS</h3>
+
+            <div id="revisao"></div>
+
+            <button onclick="reiniciar()" class="botao-principal">
+                JOGAR NOVAMENTE
+                <span>↻</span>
+            </button>
+
+        </section>
+
+        <footer>
+            <span>DS QUIZ</span>
+            <p>TECNOLOGIA • CONHECIMENTO • FUTURO</p>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
