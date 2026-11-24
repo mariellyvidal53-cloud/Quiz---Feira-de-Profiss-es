@@ -1,4 +1,3 @@
-
 const perguntas = [
     {
         pergunta: "O que é Desenvolvimento de Sistemas?",
@@ -12,13 +11,13 @@ const perguntas = [
         correta: 0
     },
     {
-        pergunta: "O que é um sistema?",
+        pergunta: "Qual destas é uma possivel carreira  para quem  faz o curso?",
         alternativas: [
-            "Um tipo de computador",
-            "Um conjunto de elementos que trabalham juntos",
-            "Um programa usado apenas para jogos",
-            "Uma peça do computador",
-            "Um cabo de internet"
+            "Analista de sistemas",
+            "Desenvolvedor de Software",
+            "Especialista em marketing digital",
+            "Designer gráfico",
+            "Professor"
         ],
         correta: 1
     },
@@ -45,13 +44,13 @@ const perguntas = [
         correta: 3
     },
     {
-        pergunta: "Para que serve o JavaScript?",
+        pergunta: "Por que escolher o curso de Desenvolvimento de Sistemas? ",
         alternativas: [
-            "Criar peças de computador",
-            "Editar somente fotografias",
-            "Montar equipamentos eletrônicos",
-            "Substituir a internet",
-            "Adicionar interatividade e funcionalidades aos sites"
+            "Porque não possui atividades práticas",
+            "Porque é voltado apenas para diversão",
+            "Porque oferece aprendizado ptático e está alinhado com o mercado",
+            "Porque não precisa aprender programação",
+            "Porque permite aprender diferentes tecnologias"
         ],
         correta: 4
     }
@@ -69,36 +68,27 @@ const perguntaTexto = document.getElementById("pergunta");
 const alternativas = document.getElementById("alternativas");
 const proximo = document.getElementById("proximo");
 
-const letras = ["A", "B", "C", "D", "E"];
-
-// COMEÇAR O QUIZ
-
 document.getElementById("comecar").onclick = function() {
     inicio.hidden = true;
     quiz.hidden = false;
-
     mostrarPergunta();
 };
-
-// MOSTRAR PERGUNTA
 
 function mostrarPergunta() {
     alternativas.innerHTML = "";
     proximo.hidden = true;
 
     document.getElementById("aviso").textContent =
-        "Escolha uma alternativa para continuar.";
+        "Escolha uma alternativa";
 
     let atual = perguntas[perguntaAtual];
 
     perguntaTexto.textContent = atual.pergunta;
 
     document.getElementById("contador").textContent =
-        "Pergunta " + (perguntaAtual + 1) +
-        " de " + perguntas.length;
+        "Pergunta " + (perguntaAtual + 1) + " de " + perguntas.length;
 
-    let porcentagem =
-        (perguntaAtual / perguntas.length) * 100;
+    let porcentagem = (perguntaAtual / perguntas.length) * 100;
 
     document.getElementById("progresso").textContent =
         Math.round(porcentagem) + "%";
@@ -110,16 +100,7 @@ function mostrarPergunta() {
         let botao = document.createElement("button");
 
         botao.className = "alternativa";
-
-        let letra = document.createElement("span");
-        letra.className = "letra-alternativa";
-        letra.textContent = letras[i];
-
-        let texto = document.createElement("span");
-        texto.textContent = atual.alternativas[i];
-
-        botao.appendChild(letra);
-        botao.appendChild(texto);
+        botao.textContent = atual.alternativas[i];
 
         botao.onclick = function() {
             selecionarResposta(i);
@@ -128,8 +109,6 @@ function mostrarPergunta() {
         alternativas.appendChild(botao);
     }
 }
-
-// VERIFICAR RESPOSTA
 
 function selecionarResposta(escolhida) {
     let atual = perguntas[perguntaAtual];
@@ -160,16 +139,14 @@ function selecionarResposta(escolhida) {
 
     if (acertou) {
         document.getElementById("aviso").textContent =
-            "✓ Muito bem! Você acertou!";
+            "Muito bem! Você acertou!";
     } else {
         document.getElementById("aviso").textContent =
-            "✕ Não foi dessa vez! Confira a resposta verde.";
+            "Resposta incorreta!";
     }
 
     proximo.hidden = false;
 }
-
-// PRÓXIMA PERGUNTA
 
 proximo.onclick = function() {
     perguntaAtual++;
@@ -181,8 +158,6 @@ proximo.onclick = function() {
     }
 };
 
-// MOSTRAR RESULTADO
-
 function mostrarResultado() {
     quiz.hidden = true;
     resultado.hidden = false;
@@ -192,20 +167,13 @@ function mostrarResultado() {
     document.getElementById("pontuacao").textContent =
         pontuacao + "/" + perguntas.length;
 
-    document.getElementById("total-acertos").textContent =
-        pontuacao;
+    document.getElementById("total-acertos").textContent = pontuacao;
+    document.getElementById("total-erros").textContent = erros;
 
-    document.getElementById("total-erros").textContent =
-        erros;
-
-    let porcentagem =
-        (pontuacao / perguntas.length) * 100;
-
-    document.getElementById("barra-final-preenchida").style.width =
-        porcentagem + "%";
+    document.getElementById("progresso").textContent = "100%";
+    document.getElementById("barra-progresso").style.width = "100%";
 
     let revisao = document.getElementById("revisao");
-
     revisao.innerHTML = "";
 
     for (let i = 0; i < perguntas.length; i++) {
@@ -213,27 +181,19 @@ function mostrarResultado() {
 
         if (respostas[i].acertou) {
             texto.className = "certo";
-
             texto.textContent =
-                "✓ ACERTOU! Pergunta " + (i + 1) +
-                " - " + perguntas[i].alternativas[perguntas[i].correta];
-
+                "✓ ACERTOU! Pergunta " + (i + 1);
         } else {
             texto.className = "errado";
-
             texto.textContent =
                 "✕ ERROU! Pergunta " + (i + 1) +
-                " - Sua resposta: " +
-                perguntas[i].alternativas[respostas[i].escolhida] +
-                " | Correta: " +
+                " | Resposta correta: " +
                 perguntas[i].alternativas[perguntas[i].correta];
         }
 
         revisao.appendChild(texto);
     }
 }
-
-// REINICIAR O QUIZ
 
 function reiniciar() {
     perguntaAtual = 0;
@@ -243,7 +203,5 @@ function reiniciar() {
     resultado.hidden = true;
     inicio.hidden = false;
 
-    document.getElementById("barra-final-preenchida").style.width =
-        "0%";
+    document.getElementById("barra-progresso").style.width = "0%";
 }
-
